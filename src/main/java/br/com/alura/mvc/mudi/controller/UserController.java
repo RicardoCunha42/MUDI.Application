@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.model.StatusPedido;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
-import br.com.alura.mvc.mudi.repository.UserRespository;
+import br.com.alura.mvc.mudi.repository.UserRepository;
 
 @Controller
 @RequestMapping("user")
 public class UserController {
 	@Autowired
-	UserRespository userRespository;
+	UserRepository userRespository;
 	@Autowired
 	PedidoRepository pedidoRepository;
 	

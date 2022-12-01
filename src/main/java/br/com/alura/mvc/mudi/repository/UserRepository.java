@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.alura.mvc.mudi.model.User;
 
 @Repository
-public interface UserRespository extends JpaRepository<User, String> {
-
-	public User findByUsername(String username);
+public interface UserRepository extends JpaRepository<User, String> {
 
 }
