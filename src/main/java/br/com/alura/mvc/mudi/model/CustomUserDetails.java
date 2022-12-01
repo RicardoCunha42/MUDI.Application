@@ -1,11 +1,9 @@
-package br.com.alura.mvc.mudi.service;
+package br.com.alura.mvc.mudi.model;
 
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import br.com.alura.mvc.mudi.model.User;
 
 public class CustomUserDetails implements UserDetails {
 	private User user;

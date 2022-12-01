@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf().disable();
 	}
 	
-	
+
 //	@Override
 //	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); 
@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 ////				 User.builder()
 ////					.username("vesemir")
 ////					.password(encoder.encode("357"))
-////					.roles("ADM")
+////					.roles("ROLE_ADMIN")
 ////					.build();
 //		
 //		auth.jdbcAuthentication()

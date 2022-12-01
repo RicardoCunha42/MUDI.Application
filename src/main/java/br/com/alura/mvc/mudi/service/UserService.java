@@ -25,7 +25,7 @@ public class UserService  {
 		User user = new User();
 		user.setUsername(userDto.getUsername());
 		user.setPassword(encoder.encode(userDto.getPassword()));
-		Optional<Role> maybeRole = this.roleRepository.findById("ROLE_ADMIN");
+		Optional<Role> maybeRole = this.roleRepository.findById("ROLE_USER");
 		user.setRoles(maybeRole.get());
 		
 		this.userRepository.save(user);

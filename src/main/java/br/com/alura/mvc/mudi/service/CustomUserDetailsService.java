@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import br.com.alura.mvc.mudi.model.CustomUserDetails;
 import br.com.alura.mvc.mudi.model.User;
 import br.com.alura.mvc.mudi.repository.UserRepository;
 
