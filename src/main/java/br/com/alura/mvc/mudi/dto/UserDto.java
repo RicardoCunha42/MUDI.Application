@@ -2,6 +2,10 @@ package br.com.alura.mvc.mudi.dto;
 
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import br.com.alura.mvc.mudi.model.User;
+
 public class UserDto {
 	@NotEmpty(message = "O nome de usuário não pode estar vazio")
 	private String username;
@@ -17,7 +21,7 @@ public class UserDto {
 		this.password = password;
 	}
 
-	public String getUserame() {
+	public String getUsername() {
 		return username;
 	}
 
@@ -31,6 +35,14 @@ public class UserDto {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public User toUser() {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		User user = new User();
+		user.setUsername(this.getUsername());
+		user.setPassword(encoder.encode(this.getPassword()));
+		return user;
 	}
 
 }
