@@ -82,7 +82,7 @@
 							
 							axios
 								.post('http://localhost:8080/api/ofertas', {
-									pedidoId: pedido.id,
+									idPedido: pedido.id,
 									valor: pedido.valor,
 									dataEntrega: pedido.dataEntrega,
 									comentario: pedido.comentario
