@@ -1,0 +1,62 @@
+<html>
+	<head th:replace="~{base :: head}"></head>
+	<body>
+		<div th:replace="~{base :: logo}"></div>
+		
+		<div class="container">
+			<div th:replace="~{base :: title('Ofertas recebidas')}"></div>
+			
+			<div class="card mb-3" th:each="oferta : ${ofertas}">
+			
+				<div class="card-header alert alert-dark" role="alert" th:text="${oferta.pedido.getNomeProduto()}"></div>			
+			
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-sm-8 mb-3">							
+							<div>Produto</div>
+							<div><a th:href="@{${oferta.pedido.getUrlProduto()}}" th:text="${oferta.pedido.getNomeProduto()}"></a></div>
+	
+							<div>Descrição</div>
+							<div><textarea disabled="disabled" class="form-control" th:text="${oferta.pedido.getDescricao()}"></textarea></div>
+							
+							<div class="row mt-3">
+								<div class="col-md-5">
+									<label for="valor">Valor:</label>
+									<input name="valor" disabled="disabled" class="form-control" th:value="${oferta.valor}"/>
+								</div>
+								<div class="col-md-7">
+									<label for="data">Data de entrega:</label>
+									<input name="data" disabled="disabled" class="form-control" th:value="${oferta.dataEntrega}"/>							
+								</div>
+							</div>
+							
+							<div>
+								<label class="mt-2">Comentário</label>
+								<textarea disabled="disabled" class="form-control" th:text="${oferta.comentario}" ></textarea>
+							</div>
+							<form th:action="@{/pedido/setAprovedStatus}">
+								<button id="accept" name="pedidoId" class="btn btn-primary mt-2" th:value="${oferta.pedido.getId()}">
+									Aceitar oferta
+								</button>
+							</form>
+						</div>
+						<div class="col-12 col-sm-4">
+							<div>
+								<img class="img-thumbnail" th:src="${oferta.pedido.getUrlImagem()}"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var button = document.querySelector('#accept');
+			button.addEventListener('click', acceptOffer);
+			
+			function acceptOffer(){
+				button.className='btn btn-success mt-2';
+				button.textContent='Oferta aceita!';
+			}
+		</script>
+	</body>
+</html>
