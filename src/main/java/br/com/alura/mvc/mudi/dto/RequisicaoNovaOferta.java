@@ -10,20 +10,24 @@ import javax.validation.constraints.Pattern;
 import br.com.alura.mvc.mudi.model.Oferta;
 
 public class RequisicaoNovaOferta {
-	private Long idPedido;
-	@NotNull @Pattern (regexp = "^\\d+(\\.\\d+{2})?$")
+	private Long pedidoId;
+
+	@Pattern(regexp = "^\\d+(\\.\\d+{2})?$")
+	@NotNull
 	private String valor;
-	@NotNull @Pattern (regexp = "^\\d{2}/\\d{2}/\\d{4}$")
+
+	@Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}$")
+	@NotNull
 	private String dataEntrega;
 	private String comentario;
-	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-	public Long getIdPedido() {
-		return idPedido;
+	public Long getPedidoId() {
+		return pedidoId;
 	}
-
-	public void setIdPedido(Long idPedido) {
-		this.idPedido = idPedido;
+	
+	public void setPedidoId(Long pedidoId) {
+		this.pedidoId = pedidoId;
 	}
 
 	public String getValor() {
