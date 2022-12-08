@@ -56,6 +56,11 @@
 							</div>
 						</div>
 					</div>
+					<form th:action="@{/oferta/receivedOffers}">
+						<button name="pedidoId" th:value="${pedido.id}" type="submit" class="btn btn-success">
+						Ofertas recebidas
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
