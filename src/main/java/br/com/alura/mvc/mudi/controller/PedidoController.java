@@ -1,12 +1,10 @@
 package br.com.alura.mvc.mudi.controller;
 
-import java.util.List;
-import java.util.Optional;
+import java.security.Principal;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,19 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.alura.mvc.mudi.dto.RequisicaoNovoPedido;
-import br.com.alura.mvc.mudi.model.Pedido;
-import br.com.alura.mvc.mudi.model.User;
-import br.com.alura.mvc.mudi.repository.PedidoRepository;
-import br.com.alura.mvc.mudi.repository.UserRepository;
 import br.com.alura.mvc.mudi.service.PedidoService;
 
 @Controller
 @RequestMapping("pedido")
 public class PedidoController {
-	@Autowired
-	private PedidoRepository pedidoRepository;
-	@Autowired
-	private UserRepository userRepository;
 	@Autowired
 	private PedidoService pedidoService;
 
@@ -42,20 +32,14 @@ public class PedidoController {
 		if (result.hasErrors()) {
 			return "pedido/form";
 		}
-		Pedido pedido = requisicaoNovoPedido.toPedido();
+		pedidoService.addPedido(requisicaoNovoPedido);
 		
-		String username =SecurityContextHolder.getContext().getAuthentication().getName();
-		Optional<User> maybeUser = this.userRepository.findById(username);
-		User user = maybeUser.get();
-		pedido.setUser(user);
-		this.pedidoRepository.save(pedido);
 		return "redirect:/home";
 	}
 	
 	@GetMapping("setAprovedStatus")
-	public String setAprovedStatus(@RequestParam (name = "pedidoId") Long pedidoId, Model model) {
-		List<Pedido> pedidos = this.pedidoService.setAprovedStatus(pedidoId);
-		model.addAttribute("pedidos", pedidos);
+	public String setAprovedStatus(@RequestParam (name = "pedidoId") Long pedidoId, Model model, Principal principal) {
+		this.pedidoService.setAprovedStatus(pedidoId, model,principal);
 		
 		return "user/userHome";
 	}
