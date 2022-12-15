@@ -1,7 +1,6 @@
 package br.com.alura.mvc.mudi.controller;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,33 +10,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.alura.mvc.mudi.model.Pedido;
-import br.com.alura.mvc.mudi.model.StatusPedido;
-import br.com.alura.mvc.mudi.repository.PedidoRepository;
-import br.com.alura.mvc.mudi.repository.UserRepository;
+import br.com.alura.mvc.mudi.service.UserService;
 
 @Controller
 @RequestMapping("user")
 public class UserController {
 	@Autowired
-	UserRepository userRespository;
-	@Autowired
-	PedidoRepository pedidoRepository;
+	UserService userService;
 	
 	
 	@GetMapping("pedido")
 	public String home(Model model, Principal principal) {
-		List<Pedido> pedidos = this.pedidoRepository.findAllByUsername(principal.getName());
-		model.addAttribute("pedidos", pedidos);
+		this.userService.getPedidos(model, principal);
+		
 		return "user/userHome";
 	}
 	
 	@GetMapping("pedido/{status}")
 	public String homeByStatus(@PathVariable String status, Model model, Principal principal) {
-		List<Pedido> pedidos = this.pedidoRepository
-				.findByStatusAndUser(StatusPedido.valueOf(status.toUpperCase()), principal.getName());
-		model.addAttribute("pedidos", pedidos);
-		model.addAttribute("status", status);
+		this.userService.getPedidoByUserAndStatus(status, model, principal);
+		
 		return "user/userHome";
 	}
 	
