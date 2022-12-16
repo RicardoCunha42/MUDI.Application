@@ -32,14 +32,15 @@ public class PedidoController {
 		if (result.hasErrors()) {
 			return "pedido/form";
 		}
-		pedidoService.addPedido(requisicaoNovoPedido);
+		this.pedidoService.addPedido(requisicaoNovoPedido);
 		
 		return "redirect:/home";
 	}
 	
 	@GetMapping("setAprovedStatus")
-	public String setAprovedStatus(@RequestParam (name = "pedidoId") Long pedidoId, Model model, Principal principal) {
-		this.pedidoService.setAprovedStatus(pedidoId, model,principal);
+	public String setAprovedStatus(@RequestParam (name = "pedidoId") Long pedidoId, @RequestParam (name = "ofertaId") Long ofertaId, 
+			Model model, Principal principal) {
+		this.pedidoService.setAprovedStatus(pedidoId, ofertaId, model,principal);
 		
 		return "user/userHome";
 	}

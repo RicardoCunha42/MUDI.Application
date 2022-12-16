@@ -36,18 +36,17 @@
 									Valor: <span th:if = "${pedido.valor} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.valor, 0, 'POINT', 2, 'COMMA')}">5000</span>
 								</div>
 								<div class="col-md-7">
-									Data de entrega <span th:text="${#temporals.format(pedido.dataEntrega, 'dd/MM/yyyy')}">10/05/2020</span>
+									Data de entrega: <span th:text="${#temporals.format(pedido.dataEntrega, 'dd/MM/yyyy')}">10/05/2020</span>
 								</div>
 							</div>
 							<div>Produto</div>
 							<div>
-								<input class="form-control" th:value="${pedido.urlProduto}"
-									value="url do produto" />
+								<input class="form-control" th:value="${pedido.urlProduto}" disabled="disabled" value="url do produto" />
 							</div>
 	
 							<div>Descrição</div>
 							<div>
-								<textarea class="form-control" th:text="${pedido.descricao}">Descrição</textarea>
+								<textarea class="form-control" disabled="disabled" th:text="${pedido.descricao}">Descrição</textarea>
 							</div>
 						</div>
 						<div class="col-12 col-sm-4">
@@ -56,8 +55,8 @@
 							</div>
 						</div>
 					</div>
-					<form th:action="@{/oferta/receivedOffers}">
-						<button name="pedidoId" th:value="${pedido.id}" type="submit" class="btn btn-success">
+					<form th:if="${pedido.status.name() == 'AGUARDANDO'}" th:action="@{/oferta/receivedOffers}">
+						<button th:name="pedidoId" type="submit" class="btn btn-success" th:value=${pedido.id}>
 						Ofertas recebidas
 						</button>
 					</form>

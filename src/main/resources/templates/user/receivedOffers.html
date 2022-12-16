@@ -35,7 +35,9 @@
 								<textarea disabled="disabled" class="form-control" th:text="${oferta.comentario}" ></textarea>
 							</div>
 							<form th:action="@{/pedido/setAprovedStatus}">
-								<button id="accept" name="pedidoId" class="btn btn-primary mt-2" th:value="${oferta.pedido.getId()}">
+								<input name="pedidoId" type="hidden" th:name="pedidoId" th:value=${oferta.pedido.getId()}>
+								<input name="ofertaId" type="hidden" th:name="ofertaId" th:value=${oferta.id}>
+								<button id="accept" class="btn btn-primary mt-2">
 									Aceitar oferta
 								</button>
 							</form>
