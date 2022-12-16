@@ -7,6 +7,9 @@ After the course, I expanded the original application with these new features:\
 - Offers on orders are now stored on the databank with a order fk linking them\
 - The user accessing the "My orders" page can now click on a "Received offers" button at the end of each order to see the offers made on them\ 
 - By clicking on "Accept offer", the order status is moved from "WAITING" to "APROVED" and no longer appears on the "Make your offer" page\
+- The received offers button now only appears on the cards of orders that have a "WAITING" status. Thus making it impossible to see and accept more offers if the status is "APROVED" (an offer was already accepted) or "DELIVERED"\
+- Accepting an offer makes it so that its value and deliver date are set in those respective fields on the order card\
+- The username is now displayed at the top right corner, next to the logout button\
 
 
 #How to use
