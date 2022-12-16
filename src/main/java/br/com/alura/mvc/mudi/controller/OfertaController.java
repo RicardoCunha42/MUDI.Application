@@ -20,7 +20,7 @@ public class OfertaController {
 		return "ofertas/home";
 	}
 	
-	@GetMapping("receivedOffers")
+	@GetMapping("/receivedOffers")
 	public String getReceivedOffers(@RequestParam (name = "pedidoId") Long pedidoId, Model model){
 		this.ofertaService.getReceivedOffers(pedidoId, model);
 		

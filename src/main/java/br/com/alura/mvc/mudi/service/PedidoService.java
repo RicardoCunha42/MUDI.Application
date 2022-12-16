@@ -1,6 +1,7 @@
 package br.com.alura.mvc.mudi.service;
 
 import java.security.Principal;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import br.com.alura.mvc.mudi.dto.RequisicaoNovoPedido;
+import br.com.alura.mvc.mudi.model.Oferta;
 import br.com.alura.mvc.mudi.model.Pedido;
 import br.com.alura.mvc.mudi.model.StatusPedido;
 import br.com.alura.mvc.mudi.model.User;
@@ -27,11 +29,23 @@ public class PedidoService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public void setAprovedStatus(Long pedidoId, Model model, Principal principal) {
-		Optional<Pedido> maybePedido = this.pedidoRepository.findById(pedidoId);
+	public void setAprovedStatus(Long pedidoId, Long ofertaId, Model model, Principal principal) {
+		Optional<Pedido> maybePedido = this.pedidoRepository.findByIdJoinOfertas(pedidoId);
 
 		Pedido pedido = maybePedido.get();
+		Oferta oferta = null;
+		Iterator<Oferta> iterator = pedido.getOfertas().iterator();
+		while(iterator.hasNext()) {
+			Oferta maybeOferta = iterator.next();
+			if(ofertaId == maybeOferta.getId()) {
+				oferta = maybeOferta;
+				break;
+			}
+		}
+		
 		pedido.setStatus(StatusPedido.APROVADO);
+		pedido.setValor(oferta.getValor());
+		pedido.setDataEntrega(oferta.getDataEntrega());
 		this.pedidoRepository.save(pedido);
 		
 		List<Pedido> pedidos = this.pedidoRepository.findAllByUsername(principal.getName());
