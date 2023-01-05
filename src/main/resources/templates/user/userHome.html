@@ -31,9 +31,9 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-12 col-sm-8 mb-3">
-							<div class="row">
+							<div class="row" th:if="${pedido.status.name() != 'AGUARDANDO'}">
 								<div class="col-md-5">
-									Valor: <span th:if = "${pedido.valor} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.valor, 0, 'POINT', 2, 'COMMA')}">5000</span>
+									Valor: <span th:if = "${pedido.valor} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.valor, 0, 'POINT', 2, 'COMMA')}"></span>
 								</div>
 								<div class="col-md-7">
 									Data de entrega: <span th:text="${#temporals.format(pedido.dataEntrega, 'dd/MM/yyyy')}">10/05/2020</span>

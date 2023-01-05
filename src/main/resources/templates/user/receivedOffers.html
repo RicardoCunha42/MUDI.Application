@@ -22,11 +22,11 @@
 							<div class="row mt-3">
 								<div class="col-md-5">
 									<label for="valor">Valor:</label>
-									<input name="valor" disabled="disabled" class="form-control" th:value="${oferta.valor}"/>
+									<input name="valor" disabled="disabled" class="form-control" th:value="${'R$ ' + #numbers.formatDecimal(oferta.valor, 0, 'POINT', 2, 'COMMA')}"/>
 								</div>
 								<div class="col-md-7">
 									<label for="data">Data de entrega:</label>
-									<input name="data" disabled="disabled" class="form-control" th:value="${oferta.dataEntrega}"/>							
+									<input name="data" disabled="disabled" class="form-control" th:value="${#temporals.format(oferta.dataEntrega, 'dd/MM/yyyy')}"/>							
 								</div>
 							</div>
 							
