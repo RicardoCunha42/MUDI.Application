@@ -1,5 +1,5 @@
 # MUDI.Application-API-Rest
-API Rest java project made at Alura's Spring MVC courses. It's an application that register products and offers on them in a databank, and follows the MVC pattern. It's view layer is made with thymeleaf as well as Vue.js. 
+API Java/Spring project made at Alura's Spring MVC courses. It's an application that register products and offers on them in a databank, and follows the MVC pattern. It's view layer is made with thymeleaf as well as Vue.js. 
 
 #New features 
 After the course, I expanded the original application with these new features:\
